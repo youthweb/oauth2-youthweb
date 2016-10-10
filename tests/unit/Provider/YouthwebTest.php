@@ -78,8 +78,9 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 
 	public function testUserData()
 	{
-		$userId = rand(1000,9999);
-		$name = uniqid();
+		$userId = rand(1000,99999);
+		$firstname = uniqid();
+		$lastname = uniqid();
 		$nickname = uniqid();
 		$email = uniqid();
 
@@ -89,7 +90,7 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 		$postResponse->method('getStatusCode')->willReturn(200);
 
 		$userResponse = $this->createMock('Psr\Http\Message\ResponseInterface');
-		$userResponse->method('getBody')->willReturn('{"id": '.$userId.', "login": "'.$nickname.'", "name": "'.$name.'", "email": "'.$email.'"}');
+		$userResponse->method('getBody')->willReturn('{"data": {"type": "users","id": "'.$userId.'","attributes": {"username": "'.$nickname.'","first_name": "'.$firstname.'","last_name": "'.$lastname.'","email": "'.$email.'","birthday": "1988-03-05","created_at": "2006-01-01T21:00:00+01:00","last_login": "2016-01-01T22:00:00+02:00","zip": "12345","city": "Jamestown","description_jesus": "Lorem ipsum dolor sit amet","description_job": "Lorem ipsum dolor sit amet","description_hobbies": "Lorem ipsum dolor sit amet","description_motto": "Lorem ipsum dolor sit amet","picture_thumb_url": "https://youthweb.net/img/steckbriefe/default_pic_m.jpg","picture_url": "https://youthweb.net/img/steckbriefe/default_pic_m.jpg"}}}');
 		$userResponse->method('getHeader')->willReturn(['content-type' => 'json']);
 		$userResponse->method('getStatusCode')->willReturn(200);
 
@@ -103,14 +104,14 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 		$user = $this->provider->getResourceOwner($token);
 
 		$this->assertEquals($userId, $user->getId());
-		$this->assertEquals($userId, $user->toArray()['id']);
-		$this->assertEquals($name, $user->getName());
-		$this->assertEquals($name, $user->toArray()['name']);
+		$this->assertEquals($userId, $user->toArray()['data']['id']);
+		$this->assertEquals($firstname.' '.$lastname, $user->getName());
+		$this->assertEquals($firstname.' '.$lastname, $user->toArray()['data']['attributes']['first_name'].' '.$user->toArray()['data']['attributes']['last_name']);
 		$this->assertEquals($nickname, $user->getNickname());
-		$this->assertEquals($nickname, $user->toArray()['login']);
+		$this->assertEquals($nickname, $user->toArray()['data']['attributes']['username']);
 		$this->assertEquals($email, $user->getEmail());
-		$this->assertEquals($email, $user->toArray()['email']);
-		$this->assertContains($nickname, $user->getUrl());
+		$this->assertEquals($email, $user->toArray()['data']['attributes']['email']);
+		$this->assertContains((string) $userId, $user->getUrl());
 	}
 
 	/**
