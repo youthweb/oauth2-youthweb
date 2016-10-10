@@ -1,0 +1,37 @@
+{
+	"name": "youthweb/oauth2-youthweb",
+	"description": "Youthweb OAuth 2.0 Client Provider",
+	"license": "GPL3",
+	"authors": [
+		{
+			"name": "Artur Weigandt",
+			"email": "art4@wlabs.de",
+			"homepage": "https://wlabs.de"
+		}
+	],
+	"keywords": [
+		"oauth",
+		"oauth2",
+		"client",
+		"authorization",
+		"authorisation",
+		"youthweb"
+	],
+	"require": {
+		"php": ">=5.6.0",
+		"league/oauth2-client": "~1.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~5.6"
+	},
+	"autoload": {
+		"psr-4": {
+			"Youthweb\\OAuth2\\Client\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Youthweb\\OAuth2\\Client\\Test\\": "test/src/"
+		}
+	}
+}
