@@ -37,7 +37,7 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getId()
 	{
-		return $this->response['id'] ?: null;
+		return $this->response['data']['id'] ?: null;
 	}
 
 	/**
@@ -47,7 +47,7 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getEmail()
 	{
-		return $this->response['email'] ?: null;
+		return $this->response['data']['attributes']['email'] ?: null;
 	}
 
 	/**
@@ -57,7 +57,12 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getName()
 	{
-		return $this->response['name'] ?: null;
+		if ( isset($this->response['data']['attributes']['first_name']) )
+		{
+			return $this->response['data']['attributes']['first_name'] . ' ' . $this->response['data']['attributes']['last_name'];
+		}
+
+		return null;
 	}
 
 	/**
@@ -67,7 +72,7 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getNickname()
 	{
-		return $this->response['login'] ?: null;
+		return $this->response['data']['attributes']['username'] ?: null;
 	}
 
 	/**
@@ -77,7 +82,7 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getUrl()
 	{
-		return trim($this->domain.'/'.$this->getNickname()) ?: null;
+		return trim($this->domain.'/users/'.$this->getId()) ?: null;
 	}
 
 	/**

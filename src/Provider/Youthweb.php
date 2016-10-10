@@ -58,12 +58,24 @@ class Youthweb extends AbstractProvider
 	 */
 	public function getResourceOwnerDetailsUrl(AccessToken $token)
 	{
-		if ($this->domain === 'https://youthweb.net')
-		{
-			return $this->apiDomain.'/me';
-		}
+		return $this->apiDomain.'/me';
+	}
 
-		return $this->domain.'/me';
+	/**
+	 * Returns an authenticated PSR-7 request instance for Youthweb-API.
+	 *
+	 * @param  string $method
+	 * @param  string $url
+	 * @param  AccessToken|string $token
+	 * @param  array $options Any of "headers", "body", and "protocolVersion".
+	 * @return RequestInterface
+	 */
+	public function getAuthenticatedRequest($method, $url, $token, array $options = [])
+	{
+		$options['headers']['Accept'] = 'application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version=0.5';
+		$options['headers']['Content-Type'] = 'application/vnd.api+json';
+
+		return parent::getAuthenticatedRequest($method, $url, $token, $options);
 	}
 
 	/**
