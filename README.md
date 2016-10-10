@@ -1,5 +1,11 @@
 # Youthweb Provider for OAuth 2.0 Client
 
+[![Latest Version](https://img.shields.io/github/release/youthweb/oauth2-youthweb.svg)](https://github.com/youthweb/oauth2-youthweb/releases)
+[![Software License GLPv3](http://img.shields.io/badge/License-GPLv3-brightgreen.svg)](LICENSE)
+[![Build Status](http://img.shields.io/travis/youthweb/oauth2-youthweb.svg)](https://travis-ci.org/youthweb/oauth2-youthweb)
+[![Coverage Status](https://coveralls.io/repos/youthweb/oauth2-youthweb/badge.svg?branch=master&service=github)](https://coveralls.io/github/youthweb/oauth2-youthweb?branch=master)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/youthweb/youthweb-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This package provides Youthweb OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
 ## Installation
