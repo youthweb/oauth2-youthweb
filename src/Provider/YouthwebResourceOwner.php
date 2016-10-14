@@ -57,12 +57,14 @@ class YouthwebResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getName()
 	{
+		$name = null;
+
 		if ( isset($this->response['data']['attributes']['first_name']) )
 		{
-			return $this->response['data']['attributes']['first_name'] . ' ' . $this->response['data']['attributes']['last_name'];
+			$name = $this->response['data']['attributes']['first_name'] . ' ' . $this->response['data']['attributes']['last_name'];
 		}
 
-		return null;
+		return $name;
 	}
 
 	/**
