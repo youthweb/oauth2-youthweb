@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.0.1] - 2016-10-27
 ### Changed
 - Fixed error handling for JSON API errors
 
@@ -13,5 +15,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.0...1.0.1
 [1.0]: https://github.com/youthweb/oauth2-youthweb/compare/2ab1e2eefcf5ef86de03995ce5e804b24a2b118d...1.0.0
