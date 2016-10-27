@@ -95,7 +95,7 @@ class Youthweb extends AbstractProvider
 	 *
 	 * @link   http://jsonapi.org/format/1.0/#errors
 	 * @link   https://tools.ietf.org/html/rfc6749#section-5.2
-	 * @throws YouthwebIdentityProviderException
+	 * @throws IdentityProviderException
 	 * @param  ResponseInterface $response
 	 * @param  string $data Parsed response data
 	 * @return void
