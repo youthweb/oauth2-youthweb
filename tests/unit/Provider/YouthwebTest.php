@@ -115,13 +115,13 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
+	 * @test errors
 	 **/
-	public function testExceptionThrownWhenErrorObjectReceived()
+	public function testExceptionThrownWhenErrorObjectWithDetailReceived()
 	{
 		$status = rand(400,600);
 		$postResponse = $this->createMock('Psr\Http\Message\ResponseInterface');
-		$postResponse->method('getBody')->willReturn('{"message": "Validation Failed","errors": [{"resource": "Issue","field": "title","code": "missing_field"}]}');
+		$postResponse->method('getBody')->willReturn('{"errors": [{"status": "406","title": "Not Acceptable","detail": "You havn\'t specified the the Accept Header. You have to use Accept application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version="}]}');
 		$postResponse->method('getHeader')->willReturn(['content-type' => 'json']);
 		$postResponse->method('getStatusCode')->willReturn($status);
 
@@ -130,17 +130,23 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 			->method('send')
 			->willReturn($postResponse);
 		$this->provider->setHttpClient($client);
+
+		$this->setExpectedException(
+			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
+			'You havn\'t specified the the Accept Header. You have to use Accept application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version='
+		);
+
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 	}
 
 	/**
-	 * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
+	 * @test errors
 	 **/
-	public function testExceptionThrownWhenOAuthErrorReceived()
+	public function testExceptionThrownWhenErrorObjectWithoutDetailReceived()
 	{
-		$status = 200;
+		$status = rand(400,600);
 		$postResponse = $this->createMock('Psr\Http\Message\ResponseInterface');
-		$postResponse->method('getBody')->willReturn('{"error": "bad_verification_code","error_description": "The code passed is incorrect or expired.","error_uri": "https://developer.github.com/v3/oauth/#bad-verification-code"}');
+		$postResponse->method('getBody')->willReturn('{"errors": [{"status": "406","title": "Not Acceptable"}]}');
 		$postResponse->method('getHeader')->willReturn(['content-type' => 'json']);
 		$postResponse->method('getStatusCode')->willReturn($status);
 
@@ -149,6 +155,37 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 			->method('send')
 			->willReturn($postResponse);
 		$this->provider->setHttpClient($client);
+
+		$this->setExpectedException(
+			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
+			'Not Acceptable'
+		);
+
+		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+	}
+
+	/**
+	 * @test errors
+	 **/
+	public function testExceptionThrownWhenOAuthErrorReceived()
+	{
+		$status = rand(400,600);
+		$postResponse = $this->createMock('Psr\Http\Message\ResponseInterface');
+		$postResponse->method('getBody')->willReturn('{"error": "invalid_request","error_description": "The request is missing a required parameter, includes an unsupported parameter value (other than grant type), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed.","error_uri": "https://tools.ietf.org/html/rfc6749#section-5.2"}');
+		$postResponse->method('getHeader')->willReturn(['content-type' => 'json']);
+		$postResponse->method('getStatusCode')->willReturn($status);
+
+		$client = $this->createMock('GuzzleHttp\ClientInterface');
+		$client->expects($this->once())
+			->method('send')
+			->willReturn($postResponse);
+		$this->provider->setHttpClient($client);
+
+		$this->setExpectedException(
+			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
+			'invalid_request'
+		);
+
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 	}
 }

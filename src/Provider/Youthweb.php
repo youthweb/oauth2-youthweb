@@ -3,7 +3,6 @@
 namespace Youthweb\OAuth2\Client\Provider;
 
 use Youthweb\OAuth2\Client\Provider\Exception\YouthwebIdentityProviderException;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
@@ -94,9 +93,9 @@ class Youthweb extends AbstractProvider
 	/**
 	 * Check a provider response for errors.
 	 *
-	 * @link   https://developer.github.com/v3/#client-errors
-	 * @link   https://developer.github.com/v3/oauth/#common-errors-for-the-access-token-request
-	 * @throws IdentityProviderException
+	 * @link   http://jsonapi.org/format/1.0/#errors
+	 * @link   https://tools.ietf.org/html/rfc6749#section-5.2
+	 * @throws YouthwebIdentityProviderException
 	 * @param  ResponseInterface $response
 	 * @param  string $data Parsed response data
 	 * @return void
@@ -105,10 +104,13 @@ class Youthweb extends AbstractProvider
 	{
 		if ($response->getStatusCode() >= 400)
 		{
-			throw YouthwebIdentityProviderException::clientException($response, $data);
-		}
-		elseif (isset($data['error']))
-		{
+			// check for JSON API errors
+			if ( isset($data['errors']) )
+			{
+				throw YouthwebIdentityProviderException::clientException($response, $data);
+			}
+
+			// It must be an oauth2 error
 			throw YouthwebIdentityProviderException::oauthException($response, $data);
 		}
 	}

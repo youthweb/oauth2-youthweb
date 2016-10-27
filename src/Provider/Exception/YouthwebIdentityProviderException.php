@@ -13,14 +13,23 @@ class YouthwebIdentityProviderException extends IdentityProviderException
 	 * @param  ResponseInterface $response
 	 * @param  string $data Parsed response data
 	 *
-	 * @return IdentityProviderException
+	 * @return YouthwebIdentityProviderException
 	 */
 	public static function clientException(ResponseInterface $response, $data)
 	{
-		return static::fromResponse(
-			$response,
-			isset($data['message']) ? $data['message'] : $response->getReasonPhrase()
-		);
+		$message = $response->getReasonPhrase();
+
+		// Use only the first error
+		if ( isset($data['errors'][0]['detail']) )
+		{
+			$message = (string) $data['errors'][0]['detail'];
+		}
+		elseif ( isset($data['errors'][0]['title']) )
+		{
+			$message = (string) $data['errors'][0]['title'];
+		}
+
+		return static::fromResponse($response, $message);
 	}
 
 	/**
@@ -29,7 +38,7 @@ class YouthwebIdentityProviderException extends IdentityProviderException
 	 * @param  ResponseInterface $response
 	 * @param  string $data Parsed response data
 	 *
-	 * @return IdentityProviderException
+	 * @return YouthwebIdentityProviderException
 	 */
 	public static function oauthException(ResponseInterface $response, $data)
 	{
@@ -45,7 +54,7 @@ class YouthwebIdentityProviderException extends IdentityProviderException
 	 * @param  ResponseInterface $response
 	 * @param  string $message
 	 *
-	 * @return IdentityProviderException
+	 * @return YouthwebIdentityProviderException
 	 */
 	protected static function fromResponse(ResponseInterface $response, $message = null)
 	{
