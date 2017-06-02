@@ -71,7 +71,7 @@ class Youthweb extends AbstractProvider
 	 */
 	public function getAuthenticatedRequest($method, $url, $token, array $options = [])
 	{
-		$options['headers']['Accept'] = 'application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version=0.5';
+		$options['headers']['Accept'] = 'application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version=0.9';
 		$options['headers']['Content-Type'] = 'application/vnd.api+json';
 
 		return parent::getAuthenticatedRequest($method, $url, $token, $options);

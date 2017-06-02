@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Library uses Youthweb-API 0.9
+
 ## [1.0.1] - 2016-10-27
 ### Changed
 - Fixed error handling for JSON API errors
