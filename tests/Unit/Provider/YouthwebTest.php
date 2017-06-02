@@ -1,8 +1,8 @@
 <?php
 
-namespace Youthweb\OAuth2\Client\Test\Provider;
+namespace Youthweb\OAuth2\Client\Tests\Unit\Provider;
 
-class YouthwebTest extends \PHPUnit_Framework_TestCase
+class YouthwebTest extends \PHPUnit\Framework\TestCase
 {
 	protected $provider;
 
@@ -131,10 +131,8 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 			->willReturn($postResponse);
 		$this->provider->setHttpClient($client);
 
-		$this->setExpectedException(
-			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
-			'You havn\'t specified the the Accept Header. You have to use Accept application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version='
-		);
+		$this->expectException('League\OAuth2\Client\Provider\Exception\IdentityProviderException');
+		$this->expectExceptionMessage('You havn\'t specified the the Accept Header. You have to use Accept application/vnd.api+json, application/vnd.api+json; net.youthweb.api.version=');
 
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 	}
@@ -156,10 +154,8 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 			->willReturn($postResponse);
 		$this->provider->setHttpClient($client);
 
-		$this->setExpectedException(
-			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
-			'Not Acceptable'
-		);
+		$this->expectException('League\OAuth2\Client\Provider\Exception\IdentityProviderException');
+		$this->expectExceptionMessage('Not Acceptable');
 
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 	}
@@ -181,10 +177,8 @@ class YouthwebTest extends \PHPUnit_Framework_TestCase
 			->willReturn($postResponse);
 		$this->provider->setHttpClient($client);
 
-		$this->setExpectedException(
-			'League\OAuth2\Client\Provider\Exception\IdentityProviderException',
-			'invalid_request'
-		);
+		$this->expectException('League\OAuth2\Client\Provider\Exception\IdentityProviderException');
+		$this->expectExceptionMessage('invalid_request');
 
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 	}
