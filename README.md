@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/youthweb/oauth2-youthweb/badge.svg?branch=master&service=github)](https://coveralls.io/github/youthweb/oauth2-youthweb?branch=master)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/youthweb/youthweb-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This package provides Youthweb OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+This package provides [Youthweb OAuth 2.0 support](http://developer.youthweb.net/api_general_oauth2.html) for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
 ## Installation
 
@@ -84,10 +84,14 @@ $authorizationUrl = $provider->getAuthorizationUrl($options);
 ```
 If neither are defined, the provider will utilize internal defaults.
 
-At the time of authoring this documentation, the following scopes are available:
+At the time of authoring this documentation, the following scopes are available with Youthweb-API 0.9:
 
+- post:read
+- post:write
 - user:read
 - user:email
+
+See [here](http://developer.youthweb.net/api_general_scopes.html) for more information.
 
 ## Testing
 
