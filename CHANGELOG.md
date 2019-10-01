@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-10-01
+
 ### Added
 
 - The api version is now configurable via `Youthweb\OAuth2\Client\Provider\Youthweb::__construct()`
@@ -36,7 +38,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Initial release
 
-[Unreleased]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/youthweb/oauth2-youthweb/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.0...1.0.1
 [1.0]: https://github.com/youthweb/oauth2-youthweb/compare/2ab1e2eefcf5ef86de03995ce5e804b24a2b118d...1.0.0
