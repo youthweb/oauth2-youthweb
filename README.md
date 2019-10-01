@@ -27,7 +27,7 @@ $provider = new Youthweb\OAuth2\Client\Provider\Youthweb([
     'clientId'          => '{youthweb-client-id}',
     'clientSecret'      => '{youthweb-client-secret}',
     'redirectUri'       => 'https://example.org/callback-url',
-    'apiVersion'        => '0.15', // optional,
+    'apiVersion'        => '0.15', // optional
 ]);
 
 if ( ! isset($_GET['code']) )
@@ -102,7 +102,7 @@ $ ./vendor/bin/phpunit
 
 ## Contributing
 
-Please feel free to fork and sending Pull Requests. This project follows [Semantic Versioning 2](http://semver.org).
+Please feel free to fork and sending Pull Requests. This project follows [Semantic Versioning 2](http://semver.org) and [PSR-2](https://www.php-fig.org/psr/psr-2/).
 
 ## Credits
 

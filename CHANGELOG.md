@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Update default api version to 0.15
 - Drop support for PHP 5.6, 7.0 and 7.1
+- Change Code Style to PSR-2
 
 ## [1.0.2] - 2017-06-04
 
