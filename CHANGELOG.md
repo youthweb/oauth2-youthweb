@@ -5,19 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- The api version is now configurable via `Youthweb\OAuth2\Client\Provider\Youthweb::__construct()`
+- Added support for PHP 7.2 and 7.3
+
+### Changed
+
+- Update default api version to 0.15
+- Drop support for PHP 5.6, 7.0 and 7.1
+
 ## [1.0.2] - 2017-06-04
 
 ### Changed
+
 - Library uses Youthweb-API 0.9
 
 ## [1.0.1] - 2016-10-27
 
 ### Changed
+
 - Fixed error handling for JSON API errors
 
 ## [1.0] - 2016-10-14
 
 ### Added
+
 - Initial release
 
 [Unreleased]: https://github.com/youthweb/oauth2-youthweb/compare/1.0.2...HEAD

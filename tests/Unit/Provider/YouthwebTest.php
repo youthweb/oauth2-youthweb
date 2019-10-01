@@ -12,6 +12,7 @@ class YouthwebTest extends \PHPUnit\Framework\TestCase
 			'clientId' => 'mock_client_id',
 			'clientSecret' => 'mock_secret',
 			'redirectUri' => 'none',
+			'apiVersion' => '0.1',
 		]);
 	}
 
