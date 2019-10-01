@@ -6,7 +6,7 @@ class YouthwebTest extends \PHPUnit\Framework\TestCase
 {
 	protected $provider;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->provider = new \Youthweb\OAuth2\Client\Provider\Youthweb([
 			'clientId' => 'mock_client_id',
@@ -36,7 +36,7 @@ class YouthwebTest extends \PHPUnit\Framework\TestCase
 
 		$url = $this->provider->getAuthorizationUrl($options);
 
-		$this->assertContains(urlencode(implode(',', $options['scope'])), $url);
+		$this->assertStringContainsString(urlencode(implode(',', $options['scope'])), $url);
 	}
 
 	public function testGetAuthorizationUrl()
@@ -111,7 +111,7 @@ class YouthwebTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($nickname, $user->toArray()['data']['attributes']['username']);
 		$this->assertEquals($email, $user->getEmail());
 		$this->assertEquals($email, $user->toArray()['data']['attributes']['email']);
-		$this->assertContains((string) $userId, $user->getUrl());
+		$this->assertStringContainsString((string) $userId, $user->getUrl());
 	}
 
 	/**
