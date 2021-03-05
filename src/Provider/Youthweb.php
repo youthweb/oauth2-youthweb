@@ -47,7 +47,7 @@ class Youthweb extends AbstractProvider
      *
      * @var string
      */
-    public $apiVersion = '0.15';
+    public $apiVersion = '0.18';
 
     /**
      * Get authorization url to begin OAuth flow
