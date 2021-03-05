@@ -1,7 +1,7 @@
 {
 	"name": "youthweb/oauth2-youthweb",
 	"description": "Youthweb OAuth 2.0 Client Provider",
-	"license": "GPL3",
+	"license": "GPL-3.0-or-later",
 	"authors": [
 		{
 			"name": "Artur Weigandt",
